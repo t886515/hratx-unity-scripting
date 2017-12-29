@@ -8,8 +8,10 @@ public class GameController : MonoBehaviour {
 	public GameObject gameOverText;
 	public bool gameOver;
 	public static GameController instance;
-	// Use this for initialization
-	void Start ()
+    public float scrollSpeed = -1.5f;
+
+    // Use this for initialization
+    void Awake ()
 	{
 		if (instance == null)
 		{
