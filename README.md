@@ -20,7 +20,8 @@ Feel free to reference the solution branch at any time, which has the scripts fi
 ## Preview
 The end goal of this sprint is to create flappy bird clone that looks like this...
 
-<img src="https://media.giphy.com/media/3oFzmmp8RP4au4ZwPe/giphy.gif"/>
+![Preview](https://thumbs.gfycat.com/OrganicAdeptAztecant-size_restricted.gif)
+  
 
 ## Adding the game objects
 If the scripts of a game are the functionality or the brain behind how everything works, then the game objects are the rest of the body that is ultimately responsible for making your game interactive. Another the way to think of this relationship is like the MVC relationships you see of front end frameworks in web development. The game objects are most closely related to the view, the components have their equivalent counter-part called... *components*, and the model is the single source of truth embedded in the game scripts.
