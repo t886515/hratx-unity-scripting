@@ -6,6 +6,7 @@ Create a flappy bird clone using Unity, scripting in C#.
   - Now that you have that created, go ahead and download the most current version of the Unity [Personal edition software](https://store.unity.com/download?ref=personal)
   
   **Before forking, switch to the ```starting-point``` branch and fork that branch.**
+  
   Now that you have done those things you can go ahead and fork this repo, and start working from your forked copy.
   
 #### *NOTES*
