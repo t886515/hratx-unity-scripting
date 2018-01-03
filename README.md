@@ -43,11 +43,42 @@ Basically every game object needs a corresponding script, and for arbitrary obje
 
 **Side Note** - *The instructions below are going to use code-blocks ```like this``` when you see this, that means that it is a function built into Unity that you can look up on the docs. I am trying to write this guide in such a way where you will be able to look up these methods on the docs and figure out how to peice the code toghether. This is for those of you that are attempting to do this sprint while not following along with a live session.*
 
+
 ### Bird.cs
 **Dependencies** - `System.Collections, System.Collections.Generic, UnityEngine`
 
+- This script is going to control our birds upward movement, and animations.
 - Need to initialize an upward velocity *float*, a *bool* that will determine whether or not our bird is alive, and references to our `Rigidbody2D` component, and `Animator`
 - Need three *void functions* `Start`, `Update`, and a function to determine when our bird collides with another rigidbody
 - Inside our start function initialize the reference to our `Rigidbody2D` and `Animator` using `GetComponent`
 - Inside our update function we need to check if our death bool is not true, if we are indeed alive, then check if our mouse button has been clicked with `Input.GetMouseButtonDown`, if so apply upward velocity to our bird with `AddForce` and `SetTrigger` our animation.
+
+
+### Column.cs
+**Dependencies** - `System.Collections, UnityEngine`
+
+- This script just needs one void function that is checking whether the game object colliding with our column, is our player bird or not by using `GetComponent` if the component is indeed our bird then we trigger our score counter, from our GameController.
+
+### ColumnPools.cs
+**Dependencies** - `System.Collections, System.Collections.Generic, UnityEngine`
+
+- This script is going to control our columns spawn rate, how many columns will be spawned at any given time, the position of the spawn, and create a pool off screen to improve performance
+- We will need *ints* for our pool size, and current column
+- *floats* for our spawn rate, column min, column max, time since last spawned, and spawn x position
+- Lastly we need to reference our `GameObject` columnPrefab, columns, and our `Vector2` pool position
+- This script will contain two void functions `Start` and `Update`
+- Start will initialize our game object column pool as an array. Then we need to loop over our aray and `Instantiate` each column with our prefab, positions, and a `Quaternion.identity`
+- Update will increment our time since last spawned by `Time.deltaTime` every time we update. It will also check if our GameController.gameOver value is false, and if our time since last spawned is greater than our spawn rate. If true, then we will reset our time since last spawned to 0, we will create a random spawn y position variable with `Random.Range`, we will take the current item in our columns array and `transform.position` with our random y postion, and defined x position. We then increment our current column, and if your current column is greater or equal to our pool size then we reset our curren column to 0
+
+### GameController.cs
+**Dependencies** - `System.Collections, System.Collections.Generic, UnityEngine, UnityEngine.SceneManagement, UnityEngine.UI`
+
+
+
+### RepeatingBackground.cs
+**Dependencies** - `System.Collections, System.Collections.Generic, UnityEngine`
+
+
+### ScrollingObject.cs
+**Dependencies** - `System.Collections, System.Collections.Generic, UnityEngine`
 
