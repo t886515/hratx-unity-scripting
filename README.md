@@ -47,7 +47,7 @@ Basically every game object needs a corresponding script, and for arbitrary obje
 ### Bird.cs
 **Dependencies** - `System.Collections, System.Collections.Generic, UnityEngine`
 
-- This script is going to control our birds upward movement, and animations.
+- This script is going to control our birds upward movement, and animations
 - Need to initialize an upward velocity *float*, a *bool* that will determine whether or not our bird is alive, and references to our `Rigidbody2D` component, and `Animator`
 - Need three *void functions* `Start`, `Update`, and a function to determine when our bird collides with another rigidbody
 - Inside our start function initialize the reference to our `Rigidbody2D` and `Animator` using `GetComponent`
@@ -57,7 +57,7 @@ Basically every game object needs a corresponding script, and for arbitrary obje
 ### Column.cs
 **Dependencies** - `System.Collections, UnityEngine`
 
-- This script just needs one void function that is checking whether the game object colliding with our column, is our player bird or not by using `GetComponent` if the component is indeed our bird then we trigger our score counter, from our GameController.
+- This script just needs one void function that is checking whether the game object colliding with our column, is our player bird or not by using `GetComponent` if the component is indeed our bird then we trigger our score counter, from our GameController
 
 ### ColumnPools.cs
 **Dependencies** - `System.Collections, System.Collections.Generic, UnityEngine`
@@ -67,7 +67,7 @@ Basically every game object needs a corresponding script, and for arbitrary obje
 - *floats* for our spawn rate, column min, column max, time since last spawned, and spawn x position
 - Lastly we need to reference our `GameObject` columnPrefab, columns, and our `Vector2` pool position
 - This script will contain two void functions `Start` and `Update`
-- Start will initialize our game object column pool as an array. Then we need to loop over our aray and `Instantiate` each column passing our prefab, positions, and a `Quaternion.identity` as arguments.
+- Start will initialize our game object column pool as an array. Then we need to loop over our aray and `Instantiate` each column passing our prefab, positions, and a `Quaternion.identity` as arguments
 - Update will increment our time since last spawned by `Time.deltaTime` every time we update. It will also check if our GameController.gameOver value is false, and if our time since last spawned is greater than our spawn rate. If true, then we will reset our time since last spawned to 0, we will create a random spawn y position variable with `Random.Range`, we will take the current item in our columns array and `transform.position` with our random y postion, and defined x position. We then increment our current column, and if your current column is greater or equal to our pool size then we reset our curren column to 0
 
 ### GameController.cs
@@ -78,16 +78,26 @@ Basically every game object needs a corresponding script, and for arbitrary obje
 - We need a `GameObject` reference to your gameOverText UI element
 - We need to initialze a `float` for our scrollSpeed, and an `int` for our score
 - Lastly we need a `Text`, and `static GameController` reference to our scoreText UI element, and game controller instance respectively
-- There are going to be 2 void functions `Awake` and `Update`, and 2 public void functions that will control when our player scores, and when our player dies.
-- Awake is going to check if our instance is *null* or non-existent, if so then we will decalre instance equal to *this*, otherwise (else) we want to `Destroy` our gameObject, and restart our game.
-- Update will check to see if the game is over, and if our `Input.GetMouseButtonDown` has been clicked if so, then we use `SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex)` to reload our current scene.
-- Our scoring function will first check to see if the game is not over, if false then we *return*. Else increment our score variable, and update our scoreText UI element to display our score.
-- Our death function with simply display our gameOverText UI element whenever called, and set our gameOver variable to true.
+- There are going to be 2 void functions `Awake` and `Update`, and 2 public void functions that will control when our player scores, and when our player dies
+- Awake is going to check if our instance is *null* or non-existent, if so then we will decalre instance equal to *this*, otherwise (else) we want to `Destroy` our gameObject, and restart our game
+- Update will check to see if the game is over, and if our `Input.GetMouseButtonDown` has been clicked if so, then we use `SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex)` to reload our current scene
+- Our scoring function will first check to see if the game is not over, if false then we *return*. Else increment our score variable, and update our scoreText UI element to display our score
+- Our death function with simply display our gameOverText UI element whenever called, and set our gameOver variable to true
 
 ### RepeatingBackground.cs
 **Dependencies** - `System.Collections, System.Collections.Generic, UnityEngine`
 
+- This script is going to control our parallax effect and the movment of the game, and also the physics of the ground object
+- We will need just two variables initialized. A reference to our `BoxCollider2D` element of our ground, and a *float* for our horizontal ground length
+- We need two void funcitons `Start` and `Update` and a private void function that is responsible for transforming our background parallax
+- Start is going to get reference to our ground collider component with `GetComponent`, and get the reference to our ground horizontal length with `groundCollider.size.x`
+- RepositionBackground is going to use a `Vector2` that contains twice that of our ground lenght, and 0 as a y value. Then with that `Vector2` we will use `transform.position` to essentially leap frog our background as the player moves to create a parallax effect
+- Update is going to be responsible for positioning our background. We will use `transform.position.x` to check and see if our current position is less than our ground length, if so then we call our previously defined function RepositionBackground
 
 ### ScrollingObject.cs
 **Dependencies** - `System.Collections, System.Collections.Generic, UnityEngine`
 
+- This script will be responsible for scrolling our entire game object. In combination with RepeatingBackground.cs script this will complete our parallax effect
+- We just need one `Rigidbody2D` reference to our game object, and two void function `Start`, and `Update`
+- Start is going to initialize our reference to our `Rigidbody2D`, once defined we will use `Rigidbody2D.velocity` to make the game scroll. We do this by passing in a `Vector2` that takes our `GameController.instance.scrollSpeed` as its first argument, and 0 in the y position as the second argument
+- Update is going to check if our `GameController.instance.gameOver` is true, if so then we will use `Rigidbody2D.velocity` and set it to 0, to make the game stop scrolling upon death
