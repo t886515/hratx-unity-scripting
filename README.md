@@ -105,3 +105,8 @@ Basically every game object needs a corresponding script, and for arbitrary obje
 - We just need one `Rigidbody2D` reference to our game object, and two void function `Start`, and `Update`
 - Start is going to initialize our reference to our `Rigidbody2D`, once defined we will use `Rigidbody2D.velocity` to make the game scroll. We do this by passing in a `Vector2` that takes our `GameController.instance.scrollSpeed` as its first argument, and 0 in the y position as the second argument
 - Update is going to check if our `GameController.instance.gameOver` is true, if so then we will use `Rigidbody2D.velocity` and set it to 0, to make the game stop scrolling upon death
+
+
+## Play!
+
+Okay so if you have succesfully implemented all these scripts without any compiling errors you should be able to press the play button on the top of the Unity editor and the game should run. Congratulations you've made a Unity app now! If you are interested in building the game and deploying it somewhere follow this [simple guide](https://unity3d.com/learn/tutorials/topics/mobile-touch/building-your-unity-game-android-device-testing) (this guide is for Android specifcically but it can applied to any platform really)
