@@ -67,13 +67,22 @@ Basically every game object needs a corresponding script, and for arbitrary obje
 - *floats* for our spawn rate, column min, column max, time since last spawned, and spawn x position
 - Lastly we need to reference our `GameObject` columnPrefab, columns, and our `Vector2` pool position
 - This script will contain two void functions `Start` and `Update`
-- Start will initialize our game object column pool as an array. Then we need to loop over our aray and `Instantiate` each column with our prefab, positions, and a `Quaternion.identity`
+- Start will initialize our game object column pool as an array. Then we need to loop over our aray and `Instantiate` each column passing our prefab, positions, and a `Quaternion.identity` as arguments.
 - Update will increment our time since last spawned by `Time.deltaTime` every time we update. It will also check if our GameController.gameOver value is false, and if our time since last spawned is greater than our spawn rate. If true, then we will reset our time since last spawned to 0, we will create a random spawn y position variable with `Random.Range`, we will take the current item in our columns array and `transform.position` with our random y postion, and defined x position. We then increment our current column, and if your current column is greater or equal to our pool size then we reset our curren column to 0
 
 ### GameController.cs
 **Dependencies** - `System.Collections, System.Collections.Generic, UnityEngine, UnityEngine.SceneManagement, UnityEngine.UI`
 
-
+- This script is going to act as our index, and is going to control everything not directly involved with gameplay. Things like displaying our UI, determing whether or not the game is over, controlling the state of the game, ect
+- We need to initialize a *bool* for our game over variable
+- We need a `GameObject` reference to your gameOverText UI element
+- We need to initialze a `float` for our scrollSpeed, and an `int` for our score
+- Lastly we need a `Text`, and `static GameController` reference to our scoreText UI element, and game controller instance respectively
+- There are going to be 2 void functions `Awake` and `Update`, and 2 public void functions that will control when our player scores, and when our player dies.
+- Awake is going to check if our instance is *null* or non-existent, if so then we will decalre instance equal to *this*, otherwise (else) we want to `Destroy` our gameObject, and restart our game.
+- Update will check to see if the game is over, and if our `Input.GetMouseButtonDown` has been clicked if so, then we use `SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex)` to reload our current scene.
+- Our scoring function will first check to see if the game is not over, if false then we *return*. Else increment our score variable, and update our scoreText UI element to display our score.
+- Our death function with simply display our gameOverText UI element whenever called, and set our gameOver variable to true.
 
 ### RepeatingBackground.cs
 **Dependencies** - `System.Collections, System.Collections.Generic, UnityEngine`
