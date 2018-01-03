@@ -24,6 +24,10 @@ The end goal of this sprint is to create flappy bird clone that looks like this.
   
 
 ## Adding the game objects
+It's important to take a second to understand how unity is structured. Basically everything in a game built with Unity is composed of *Game Objects*. You can attach components to these game objects, and make them do special things. Components can be anything from Scripts, Audio sources, Animations, Physics, etc. Here is an okay visualization of this model.
+
+![alt-text](https://koenig-media.raywenderlich.com/uploads/2011/08/unity14_diagram.png)
+
 If the scripts of a game are the functionality or the brain behind how everything works, then the game objects are the rest of the body that is ultimately responsible for making your game interactive. Another the way to think of this relationship is like the MVC relationships you see of front end frameworks in web development. The game objects are most closely related to the view, the components have their equivalent counter-part called... *components*, and the model is the single source of truth embedded in the game scripts.
 
 This step has already been done for you. The game objects are already properly positioned, configured and have the proper components attached to them. These steps are fairly simple and understanding the basics of configuring game objects and components can be easily aquired by following a few of the [Unity tutorials.](https://unity3d.com/learn/tutorials) However for the sake of brevity I've extrapolated all these complexities away for you so that we can focus on the coding portion of creating a game.
@@ -73,7 +77,7 @@ Basically every game object needs a corresponding script, and for arbitrary obje
 ### GameController.cs
 **Dependencies** - `System.Collections, System.Collections.Generic, UnityEngine, UnityEngine.SceneManagement, UnityEngine.UI`
 
-- This script is going to act as our index, and is going to control everything not directly involved with gameplay. Things like displaying our UI, determing whether or not the game is over, controlling the state of the game, ect
+- This script is going to act as our index, and is going to control everything not directly involved with gameplay. Things like displaying our UI, determing whether or not the game is over, controlling the state of the game, etc
 - We need to initialize a *bool* for our game over variable
 - We need a `GameObject` reference to your gameOverText UI element
 - We need to initialze a `float` for our scrollSpeed, and an `int` for our score
