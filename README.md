@@ -38,3 +38,16 @@ Basically every game object needs a corresponding script, and for arbitrary obje
 - GameController.cs
 - RepeatingBackground.cs
 - ScrollingObject.cs
+
+**You will need to add a folder titled ```Scripts``` and place it inside of your ```Assets``` folder.**
+
+**Side Note** - *The instructions below are going to use code-blocks ```like this``` when you see this, that means that it is a function built into Unity that you can look up on the docs. I am trying to write this guide in such a way where you will be able to look up these methods on the docs and figure out how to peice the code toghether. This is for those of you that are attempting to do this sprint while not following along with a live session.*
+
+### Bird.cs
+**Dependencies** - `System.Collections, System.Collections.Generic, UnityEngine`
+
+- Need to initialize an upward velocity *float*, a *bool* that will determine whether or not our bird is alive, and references to our `Rigidbody2D` component, and `Animator`
+- Need three *void functions* `Start`, `Update`, and a function to determine when our bird collides with another rigidbody
+- Inside our start function initialize the reference to our `Rigidbody2D` and `Animator` using `GetComponent`
+- Inside our update function we need to check if our death bool is not true, if we are indeed alive, then check if our mouse button has been clicked with `Input.GetMouseButtonDown`, if so apply upward velocity to our bird with `AddForce` and `SetTrigger` our animation.
+
